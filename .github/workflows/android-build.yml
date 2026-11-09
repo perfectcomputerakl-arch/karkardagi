@@ -2,7 +2,9 @@ name: Build KARKARDAGI APK
 
 on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+      - master
   workflow_dispatch:
 
 jobs:
@@ -13,7 +15,7 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Setup Java 17
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -24,13 +26,13 @@ jobs:
         with:
           gradle-version: '8.9'
 
-            - name: Setup Android SDK
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v4
-        with:
-          packages: |
-            platform-tools
-            platforms;android-35
-            build-tools;35.0.0
+
+      - name: Install Android packages
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
