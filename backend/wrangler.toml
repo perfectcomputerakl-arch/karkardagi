@@ -1,0 +1,7 @@
+name = "karkardagi-backend"
+main = "worker.js"
+compatibility_date = "2026-11-09"
+[[d1_databases]]
+binding = "DB"
+database_name = "karkardagi-db"
+database_id = "PASTE_D1_DATABASE_ID_HERE"
